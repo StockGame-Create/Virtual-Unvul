@@ -21,7 +21,7 @@ export default function Home() {
 
   return (
     <div style={{ padding: '40px', maxWidth: '800px', margin: '0 auto' }}>
-      <h1>🚀 Web Proxy</h1>
+      <h1>Virtual Unvul</h1>
       <p>CORS 제한 없이 모든 API에 접근하세요!</p>
       
       <div style={{ marginTop: '30px' }}>
@@ -76,4 +76,5 @@ export default function Home() {
       </div>
     </div>
   );
+
 }
