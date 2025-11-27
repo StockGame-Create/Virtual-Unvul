@@ -15,10 +15,17 @@ export default async function handler(req, res) {
 
   try {
     const response = await fetch(url);
-    const data = await response.text();
+    const contentType = response.headers.get('content-type') || 'text/plain';
     
-    res.setHeader('Content-Type', response.headers.get('content-type') || 'text/plain');
-    return res.status(response.status).send(data);
+    // JSON이면 JSON으로, 아니면 텍스트로
+    if (contentType.includes('application/json')) {
+      const data = await response.json();
+      return res.status(response.status).json(data);
+    } else {
+      const data = await response.text();
+      res.setHeader('Content-Type', contentType);
+      return res.status(response.status).send(data);
+    }
   } catch (error) {
     return res.status(500).json({ error: error.message });
   }
