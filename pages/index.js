@@ -10,7 +10,7 @@ export default function Home() {
     setLoading(true);
     try {
       const response = await fetch(`/api/proxy?url=${encodeURIComponent(url)}`);
-      const text = await response.text();  // .json() 대신 .text() 사용!
+      const text = await response.text();
       setResult(text);
     } catch (error) {
       setResult('Error: ' + error.message);
@@ -19,7 +19,7 @@ export default function Home() {
   };
 
   return (
-    <div style={{ padding: '40px', maxWidth: '800px', margin: '0 auto' }}>
+    <div style={{ padding: '40px', maxWidth: '1200px', margin: '0 auto' }}>
       <h1>🚀 Web Proxy</h1>
       
       <input
@@ -34,9 +34,16 @@ export default function Home() {
       </button>
 
       {result && (
-        <pre style={{ marginTop: '20px', padding: '20px', background: '#f5f5f5', overflow: 'auto' }}>
-          {result}
-        </pre>
+        <iframe
+          srcDoc={result}
+          style={{
+            width: '100%',
+            height: '600px',
+            border: '2px solid #ddd',
+            borderRadius: '8px',
+            marginTop: '20px'
+          }}
+        />
       )}
     </div>
   );
